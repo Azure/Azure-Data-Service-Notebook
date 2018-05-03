@@ -8,7 +8,6 @@ PACKAGES     = ["adlmagics",
                "adlmagics/magics/session",
                "adlmagics/models",
                "adlmagics/services"]
-PACKAGES_DATA = ["adlmagics_demo.ipynb"]
 AUTHOR        = ""
 AUTHOR_EMAIL  = ""
 URL           = "https://github.com/Azure/Azure-Data-Service-Notebook"
@@ -27,7 +26,6 @@ setup(name = NAME,
       license = LICENSE,
       packages = PACKAGES,
       include_package_data = True,
-      package_data = {"adlmagics_sample": PACKAGES_DATA},
       classifiers = [
         "Development Status :: 3 - Alpha",
         "Framework :: Jupyter",
