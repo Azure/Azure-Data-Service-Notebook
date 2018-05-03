@@ -5,3 +5,4 @@ class SessionListingMagic(SessionMagicBase):
         super(SessionListingMagic, self).__init__(cmd_name)
         
     def execute(self, arg_string, content_string = None):
+        pass
