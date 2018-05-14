@@ -30,11 +30,11 @@ Azure Data Service Notebook currently provides a set of magic commands for users
 	- `pip install azure-mgmt-datalake-analytics` 
 	- `pip install azure-mgmt-datalake-store` 
 	- `pip install azure-datalake-store` 
-- Copy the [adlmagic folder](https://github.com/ruixinxu/Azure-Data-Service-Notebook/tree/master/analytics_notebook/adlmagics) to local box. 
+- Copy the [adlmagic folder](/analytics_notebook/adlmagics) to local box. 
 
 
 # Examples
-- [adlmagics_demo.ipynb](https://github.com/ruixinxu/Azure-Data-Service-Notebook/blob/master/analytics_notebook/adlmagics/adlmagics_demo.ipynb), demo file of Azure Data Lake job control functions.
+- [adlmagics_demo.ipynb](/analytics_notebook/adlmagics/00_adlmagics_demo.ipynb), demo file of Azure Data Lake job control functions.
 
 
 
