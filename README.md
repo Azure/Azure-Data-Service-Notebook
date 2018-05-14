@@ -1,4 +1,43 @@
 
+# Azure Data Service Notebook
+Azure Data Service Notebook is a set of tool for working with Azure Data Service (including HDInsight, Azure Data Lake, etc)
+
+
+# Feature
+Azure Data Service Notebook currently provides a set of magic commands for users to access Azure Data Lake. Available magics are captured in the table below.
+
+| Commands | Function |
+|-----|-----|
+|%adl login |Line magic to log in to Azure Data Lake.|
+|%adl listaccounts|Line magic to list the Azure Data Lake analytic accounts for current user.|
+|%adl listjobs|Line magic to list the Azure Data Lake jobs for a given account.|
+|%%adl submitjob|Cell magic to submit a USQL job to ADL cluster.|
+|%adl viewjob|Line magic to view job info.|
+|%adl liststorefile|Line magic to list the Azure Data Lake store accounts.|
+|%adl sample|Line magic to sample a given file, return results as Pandas DataFrame.|
+|%adl logout|Line magic to log out.|
+
+
+# Installation
+
+- Download and Install [python 3.6+](https://www.python.org/downloads/)
+- Install jupyter: `pip install jupyter` 
+- Install azure packages fully : 
+	`pip install azure`
+-  Or just install the key packages : 
+	- `pip install adla`
+	- `pip install azure-mgmt-resource`
+	- `pip install azure-mgmt-datalake-analytics` 
+	- `pip install azure-mgmt-datalake-store` 
+	- `pip install azure-datalake-store` 
+- Copy the [adlmagic folder](/analytics_notebook/adlmagics) to local box. 
+
+
+# Examples
+- [adlmagics_demo.ipynb](/analytics_notebook/adlmagics/00_adlmagics_demo.ipynb), demo file of Azure Data Lake job control functions.
+
+
+
 # Contributing
 
 This project welcomes contributions and suggestions.  Most contributions require you to agree to a
