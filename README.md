@@ -1,4 +1,25 @@
 
+#Azure Data Service Notebook
+Azure Data Service Notebook is a set of tool for working with Azure Data Service (including HDInsight, Azure Data Lake)
+
+
+# Installation
+
+- Download and Install [python 3.6+](https://www.python.org/downloads/)
+- Install jupyter: pip install jupyter 
+- Install azure packages fully: 
+	`pip install azure` 
+Or just install the key packages 
+	`pip install adla` 
+	`pip install azure-mgmt-resource` 
+	`pip install azure-mgmt-datalake-analytics` 
+	`pip install azure-mgmt-datalake-store` 
+	`pip install azure-datalake-store` 
+- Copy \analytics_notebook\adlmagics\  folder to local box. 
+- Open the adlmagics_demo.ipynb file in juptyer notebook , then you can see the ADL job control functions available now.
+
+
+
 # Contributing
 
 This project welcomes contributions and suggestions.  Most contributions require you to agree to a
