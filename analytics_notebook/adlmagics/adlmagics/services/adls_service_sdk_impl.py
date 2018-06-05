@@ -59,8 +59,7 @@ class AdlsServiceSdkImpl:
         read_lines = []
         read_line_count = 0
         with adls_fs_client.open(file_path) as f:
-            read_line = f.readline()
-            while (read_line):
+            for read_line in f:
                 read_lines.append(read_line.decode(encoding).strip().split(column_sep))
                 read_line_count += 1
                 if (read_line_count > to_be_read_line_count):
