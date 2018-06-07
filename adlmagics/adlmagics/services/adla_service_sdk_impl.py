@@ -4,10 +4,10 @@ from azure.mgmt.datalake.analytics import DataLakeAnalyticsJobManagementClient
 from azure.mgmt.datalake.analytics.job.models import JobInformation, USqlJobProperties, JobType
 from uuid import uuid4
 
-from exceptions import UserNotLoggedInError
-from magics.adla.adla_consts import AdlaJobConsts
-from models.adla_account import AdlaAccount
-from models.adla_job import AdlaJob
+from adlmagics.exceptions import UserNotLoggedInError
+from adlmagics.magics.adla.adla_consts import AdlaJobConsts
+from adlmagics.models.adla_account import AdlaAccount
+from adlmagics.models.adla_job import AdlaJob
 
 class AdlaServiceSdkImpl:
     def __init__(self, token_service):

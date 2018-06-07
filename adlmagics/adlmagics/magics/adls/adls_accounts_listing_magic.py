@@ -1,6 +1,6 @@
 from IPython.core.magic_arguments import magic_arguments, argument, parse_argstring
 
-from magics.adls.adls_magic_base import AdlsMagicBase
+from adlmagics.magics.adls.adls_magic_base import AdlsMagicBase
 
 class AdlsAccountsListingMagic(AdlsMagicBase):
     def __init__(self, adls_service):

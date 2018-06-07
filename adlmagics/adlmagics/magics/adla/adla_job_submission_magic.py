@@ -1,7 +1,7 @@
 from IPython.core.magic_arguments import magic_arguments, argument, parse_argstring
 
-from magics.adla.adla_magic_base import AdlaMagicBase
-from models.adla_job_submission import AdlaJobSubmission
+from adlmagics.magics.adla.adla_magic_base import AdlaMagicBase
+from adlmagics.models.adla_job_submission import AdlaJobSubmission
 
 class AdlaJobSubmissionMagic(AdlaMagicBase):
     def __init__(self, adla_service):

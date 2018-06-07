@@ -1,4 +1,4 @@
-from magics.magic_base import MagicBase
+from adlmagics.magics.magic_base import MagicBase
 
 class AdlsMagicBase(MagicBase):
     def __init__(self, cmd_name, adls_service):

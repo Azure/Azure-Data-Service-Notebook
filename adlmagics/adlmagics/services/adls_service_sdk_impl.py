@@ -7,10 +7,10 @@ from time import time
 from datetime import datetime
 from sys import stdout
 
-from exceptions import UserNotLoggedInError
-from models.adls_account import AdlsAccount
-from models.adls_folder import AdlsFolder
-from models.adls_file import AdlsFile
+from adlmagics.exceptions import UserNotLoggedInError
+from adlmagics.models.adls_account import AdlsAccount
+from adlmagics.models.adls_folder import AdlsFolder
+from adlmagics.models.adls_file import AdlsFile
 
 class AdlsServiceSdkImpl:
     def __init__(self, token_service):
@@ -62,7 +62,7 @@ class AdlsServiceSdkImpl:
             for read_line in f:
                 read_lines.append(read_line.decode(encoding).strip().split(column_sep))
                 read_line_count += 1
-                if (read_line_count > to_be_read_line_count):
+                if (read_line_count >= to_be_read_line_count):
                     break
 
         return read_lines

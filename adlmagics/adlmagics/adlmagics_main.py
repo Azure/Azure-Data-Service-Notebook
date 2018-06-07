@@ -2,25 +2,25 @@ from IPython.core.magic import Magics, magics_class, line_cell_magic
 from sys import stdout
 from os import linesep
 
-from services.azure_token_service import AzureTokenService
-from services.adla_service_sdk_impl import AdlaServiceSdkImpl
-from services.adls_service_sdk_impl import AdlsServiceSdkImpl
+from adlmagics.services.azure_token_service import AzureTokenService
+from adlmagics.services.adla_service_sdk_impl import AdlaServiceSdkImpl
+from adlmagics.services.adls_service_sdk_impl import AdlsServiceSdkImpl
 
-from magics.azure.azure_magic_base import AzureMagicBase
-from magics.azure.azure_login_magic import AzureLoginMagic
-from magics.azure.azure_logout_magic import AzureLogoutMagic
+from adlmagics.magics.azure.azure_magic_base import AzureMagicBase
+from adlmagics.magics.azure.azure_login_magic import AzureLoginMagic
+from adlmagics.magics.azure.azure_logout_magic import AzureLogoutMagic
 
-from magics.adla.adla_magic_base import AdlaMagicBase
-from magics.adla.adla_accounts_listing_magic import AdlaAccountsListingMagic
-from magics.adla.adla_job_viewing_magic import AdlaJobViewingMagic
-from magics.adla.adla_job_submission_magic import AdlaJobSubmissionMagic
-from magics.adla.adla_jobs_listing_magic import AdlaJobsListingMagic
+from adlmagics.magics.adla.adla_magic_base import AdlaMagicBase
+from adlmagics.magics.adla.adla_accounts_listing_magic import AdlaAccountsListingMagic
+from adlmagics.magics.adla.adla_job_viewing_magic import AdlaJobViewingMagic
+from adlmagics.magics.adla.adla_job_submission_magic import AdlaJobSubmissionMagic
+from adlmagics.magics.adla.adla_jobs_listing_magic import AdlaJobsListingMagic
 
-from magics.adls.adls_magic_base import AdlsMagicBase
-from magics.adls.adls_accounts_listing_magic import AdlsAccountsListingMagic
-from magics.adls.adls_folders_listing_magic import AdlsFoldersListingMagic
-from magics.adls.adls_files_listing_magic import AdlsFilesListingMagic
-from magics.adls.adls_file_sampling_magic import AdlsFileSamplingMagic
+from adlmagics.magics.adls.adls_magic_base import AdlsMagicBase
+from adlmagics.magics.adls.adls_accounts_listing_magic import AdlsAccountsListingMagic
+from adlmagics.magics.adls.adls_folders_listing_magic import AdlsFoldersListingMagic
+from adlmagics.magics.adls.adls_files_listing_magic import AdlsFilesListingMagic
+from adlmagics.magics.adls.adls_file_sampling_magic import AdlsFileSamplingMagic
 
 @magics_class
 class AdlMagics(Magics):
@@ -89,6 +89,3 @@ class AdlMagics(Magics):
 
     def __write_line(self, text):
         stdout.write(text + linesep)
-
-def load_ipython_extension(ipython):
-    ipython.register_magics(AdlMagics)

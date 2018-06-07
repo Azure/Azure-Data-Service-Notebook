@@ -1,4 +1,4 @@
-from magics.azure.azure_magic_base import AzureMagicBase
+from adlmagics.magics.azure.azure_magic_base import AzureMagicBase
 
 class AzureLogoutMagic(AzureMagicBase):
     def __init__(self, token_service):
