@@ -1,6 +1,6 @@
 from IPython.core.magic_arguments import magic_arguments, argument, parse_argstring
 
-from magics.azure.azure_magic_base import AzureMagicBase
+from adlmagics.magics.azure.azure_magic_base import AzureMagicBase
 
 class AzureLoginMagic(AzureMagicBase):
     def __init__(self, token_service):

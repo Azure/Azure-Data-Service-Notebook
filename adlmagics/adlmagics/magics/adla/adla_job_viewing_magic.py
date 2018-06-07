@@ -1,6 +1,6 @@
 from IPython.core.magic_arguments import magic_arguments, argument, parse_argstring
 
-from magics.adla.adla_magic_base import AdlaMagicBase
+from adlmagics.magics.adla.adla_magic_base import AdlaMagicBase
 
 class AdlaJobViewingMagic(AdlaMagicBase):
     def __init__(self, adla_service):

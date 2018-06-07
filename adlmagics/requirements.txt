@@ -1,0 +1,10 @@
+ipython>=5.3.0
+notebook>=5.0.0
+ipykernel>=4.6.1
+pandas>=0.20.1
+numpy
+adal
+azure-mgmt-resource
+azure-mgmt-datalake-analytics
+azure-mgmt-datalake-store
+azure-datalake-store
