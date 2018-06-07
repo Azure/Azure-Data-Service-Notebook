@@ -1,6 +1,6 @@
 
 # Azure Data Service Notebook (Beta)
-Azure Data Service Notebook is a set of tool for working with Azure Data Service (including HDInsight, Azure Data Lake, etc)
+Azure Data Service Notebook is a set of extentions for working with Azure Data Service (e.g. Azure Data Lake, HDIsight, CosmosDB, Azure SQL and Azure Data Warehouse etc.) using Jupyter Notebook.
 
 **WARNING**: This SDK/CLI is currently in **Beta Preview** stage. It can and will change in backwards incompatible ways. 
 
@@ -8,14 +8,14 @@ Azure Data Service Notebook is a set of tool for working with Azure Data Service
 # Feature
 Azure Data Service Notebook currently provides a set of magic commands for users to access Azure Data Lake. Available magics are captured in the table below.
 
-| Commands | Function |
+| Command | Function |
 |-----|-----|
 |%adl login |Line magic to log in to Azure Data Lake.|
-|%adl listaccounts|Line magic to list the Azure Data Lake analytic accounts for current user.|
+|%adl listaccounts|Line magic to list the Azure Data Lake Analytic accounts for current user.|
 |%adl listjobs|Line magic to list the Azure Data Lake jobs for a given account.|
-|%%adl submitjob|Cell magic to submit a USQL job to ADL cluster.|
-|%adl viewjob|Line magic to view job info.|
-|%adl liststorefile|Line magic to list the Azure Data Lake store accounts.|
+|%%adl submitjob|Cell magic to submit a USQL job to Azure Data Lake cluster.|
+|%adl viewjob|Line magic to view detailed job info.|
+|%adl liststorefile|Line magic to list the Azure Data Lake Store accounts.|
 |%adl sample|Line magic to sample a given file, return results as Pandas DataFrame.|
 |%adl logout|Line magic to log out.|
 
@@ -30,7 +30,7 @@ Azure Data Service Notebook currently provides a set of magic commands for users
 
 
 # Examples
-- [adlmagics_demo.ipynb](/adlmagics/00_adlmagics_demo.ipynb), demo file of Azure Data Lake job control functions.
+- [adlmagics_demo.ipynb](/adlmagics/00_adlmagics_demo.ipynb), demo file of Azure Data Lake job control and data exploration functions.
 
 
 # Feedback
