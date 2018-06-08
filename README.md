@@ -1,8 +1,8 @@
 
-# Azure Data Service Notebook (Beta)
+# Azure Data Service Notebook (Alpha)
 Azure Data Service Notebook is a set of extentions for working with Azure Data Service (e.g. Azure Data Lake, HDIsight, CosmosDB, Azure SQL and Azure Data Warehouse etc.) using Jupyter Notebook.
 
-**WARNING**: This SDK/CLI is currently in **Beta Preview** stage. It can and will change in backwards incompatible ways. 
+**WARNING**: This SDK/CLI is currently in very early stage of development. It can and will change in backwards incompatible ways. 
 
 
 # Feature
