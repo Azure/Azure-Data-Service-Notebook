@@ -22,7 +22,7 @@ class AdlaServiceSdkImpl:
         sub_client = SubscriptionClient(self.__token_service.credentials)
         for sub in sub_client.subscriptions.list():
             dla_client = DataLakeAnalyticsAccountManagementClient(self.__token_service.credentials, sub.subscription_id)
-            accounts.extend([AdlaAccount(account.name) for account in dla_client.account.list()])
+            accounts.extend([AdlaAccount(account.name) for account in dla_client.accounts.list()])
 
         accounts.sort(key = lambda account: getattr(account, "name"))
 
