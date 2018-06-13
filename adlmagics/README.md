@@ -30,7 +30,8 @@ Azure Data Service Notebook currently provides a set of magic commands for users
 
 
 # Examples
-- [adlmagics_demo.ipynb](/adlmagics/00_adlmagics_demo.ipynb), demo file of Azure Data Lake job control and data exploration functions.
+- [adlmagics_demo.ipynb](/adlmagics/00_adlmagics_demo.ipynb), demo file of `adlmgics` functions for Azure Data Lake job control and data exploration.
+- [usql_samples.ipynb](/adlmagics/01_usql_samples.ipynb),  samples code of common U-SQL scenarios, e.g. query a TSV file, create a database, populate table, query table and create rowset in script.
 
 
 # Feedback
