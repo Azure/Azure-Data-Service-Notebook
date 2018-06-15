@@ -10,7 +10,7 @@ Azure Data Service Notebook currently provides a set of [Jupyter Magic Functions
 
 | Command | Function  |
 |-----|-----|
-|[%adl login](#%adl-login) |Line magic<sup>[*](#myfootnote1)</sup> to log in to Azure Data Lake.|
+|[%adl login](#adllogin) |Line magic<sup>[*](#myfootnote1)</sup> to log in to Azure Data Lake.|
 |%adl listaccounts|Line magic to list the Azure Data Lake Analytic accounts for current user.|
 |%adl listjobs|Line magic to list the Azure Data Lake jobs for a given account.|
 |%%adl submitjob|Cell magic<sup>[*](#myfootnote1)</sup> to submit a USQL job to Azure Data Lake cluster.|
@@ -18,6 +18,7 @@ Azure Data Service Notebook currently provides a set of [Jupyter Magic Functions
 |%adl liststorefile|Line magic to list the Azure Data Lake Store accounts.|
 |%adl sample|Line magic to sample a given file, return results as Pandas DataFrame.|
 |%adl logout|Line magic to log out.|
+
 <a name="myfootnote1">*</a> Please check [Magic Functions ](https://ipython.readthedocs.io/en/stable/interactive/tutorial.html?highlight=magic#magic-functions
 ) for detailed definiton of `Line magic` and `Cell magics`.
 
@@ -35,6 +36,7 @@ Azure Data Service Notebook currently provides a set of [Jupyter Magic Functions
 - You can submit [bug report](https://github.com/Azure/Azure-Data-Service-Notebook/issues/new?template=bug_report.md) or [feature request](https://github.com/Azure/Azure-Data-Service-Notebook/issues/new?template=feature_request.md) directly in this repo. Our team will triage issues actively.
 
 #Reference
+<a name="adllogin"></a>
 ###%adl login
 Line magic to login to Azure Data Lake service.
 
