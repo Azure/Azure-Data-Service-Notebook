@@ -35,17 +35,18 @@ Azure Data Service Notebook currently provides a set of [Jupyter Magic Functions
 # Feedback
 - You can submit [bug report](https://github.com/Azure/Azure-Data-Service-Notebook/issues/new?template=bug_report.md) or [feature request](https://github.com/Azure/Azure-Data-Service-Notebook/issues/new?template=feature_request.md) directly in this repo. Our team will triage issues actively.
 
-#Reference
+# Reference
 
 <a name="adllogin"></a>
 
-###%adl login
+### %adl login
 
 Line magic to login to Azure Data Lake service.
 
 `%adl login --tenant <tenant>`
 
-####Required Parameters
+#### Required Parameters
+
 |Name|Example|Description|
 |----|----|----|
 |tenant `required`|microsoft.onmicrosoft.com| The value of this argument can either be an `.onmicrosoft.com` domain or the Azure object ID for the tenant. |
