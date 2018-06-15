@@ -3,7 +3,7 @@ import setuptools
 name             = "adlmagics"
 description      = "Azure Data Lake management magics for Jupyter Notebook"
 long_description = ""
-version          = "0.0.1"
+version          = "0.0.1a0"
 packages         = ["adlmagics",
                     "adlmagics/magics/adla",
                     "adlmagics/magics/adls",
