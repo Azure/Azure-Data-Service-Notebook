@@ -6,7 +6,7 @@ Azure Data Service Notebook is a set of extentions for working with Azure Data S
 
 Latest Version: `0.0.1a0` 
 # Feature
-Azure Data Service Notebook currently provides a set of [Jupyter Magic Functions](https://ipython.readthedocs.io/en/stable/interactive/tutorial.html?highlight=magic#magic-functions) for users to access Azure Data Lake. Available magics are captured in the table below. Please click on the command name to see the syntax reference.
+Azure Data Service Notebook currently provides a set of [Jupyter Magic Functions](https://ipython.readthedocs.io/en/stable/interactive/tutorial.html?#magic-functions) for users to access Azure Data Lake. Available magics are captured in the table below. Please click on the command name to see the syntax reference.
 
 | Command | Function  |
 |-----|-----|
@@ -21,8 +21,7 @@ Azure Data Service Notebook currently provides a set of [Jupyter Magic Functions
 |[%adl sample](#adlsample)|Line magic to sample a given file, return results as Pandas DataFrame.|
 |[%adl logout](#adllogout)|Line magic to log out.|
 
-<a name="myfootnote1">*</a>Please check [Magic Functions ](https://ipython.readthedocs.io/en/stable/interactive/tutorial.html?highlight=magic#magic-functions
-) for detailed definiton of `Line magic` and `Cell magics`.
+<a name="myfootnote1">*</a>Please check [Magic Functions ](https://ipython.readthedocs.io/en/stable/interactive/tutorial.html?#magic-functions) for detailed definiton of `Line magic` and `Cell magics`.
 
 # Installation
 - Download and Install [python 3.6+](https://www.python.org/downloads/)
@@ -49,7 +48,7 @@ Line magic to login to Azure Data Lake service.
 %adl login --tenant <tenant>
 ```
 
-#### Required Parameters
+#### Input Parameters
 
 |Name|Type |Example|Description|
 |----|----|----|----|
@@ -66,7 +65,7 @@ Line magic to enumerate the Azure Data Lake Analytic accounts for current user. 
 			--page_account_number
 ```
 
-#### Required Parameters
+#### Input Parameters
 
 |Name|Type |Example|Description|
 |----|----|----|----|
@@ -140,6 +139,9 @@ Line magic to list the Azure Data Lake Store accounts.
 ```
 %adl liststoreaccounts
 ```
+
+<a name="adlliststorefolders"></a>
+
 ## %adl liststorefolders
 Line magic to list the folders under a given directory.
 ```
