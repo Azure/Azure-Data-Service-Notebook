@@ -7,7 +7,7 @@ class AdlsFileSamplingMagic(AdlsMagicBase):
     def __init__(self, adls_service):
         super(AdlsFileSamplingMagic, self).__init__("sample", adls_service)
 
-        self.__fileTypeColumnSepMappings = { "tsv" : "\t", "csv" : ",", "txt" : "" }
+        self.__fileTypeColumnSepMappings = { "tsv" : "\t", "csv" : ",", "txt" : None }
 
     @magic_arguments()
     @argument("--account", type = str, help = "Azure data lake store account name.")
