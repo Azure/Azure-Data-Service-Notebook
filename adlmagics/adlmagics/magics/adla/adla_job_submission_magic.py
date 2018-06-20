@@ -19,6 +19,9 @@ class AdlaJobSubmissionMagic(AdlaMagicBase):
         job_submission = AdlaJobSubmission(args.name, content_string, args.parallelism, args.priority, args.runtime)
 
         self._write_line("Submitting azure data lake job to account '%s'..." % (args.account))
+        
+        if not args.priority in range(0, 1001):
+            raise ValueError("parameter `priority` should be in range 0 - 1000 !") 
 
         job = self._adla_service.submit_job(args.account, job_submission)
 
