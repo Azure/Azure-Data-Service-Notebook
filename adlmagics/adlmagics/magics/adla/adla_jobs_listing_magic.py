@@ -19,8 +19,8 @@ class AdlaJobsListingMagic(AdlaMagicBase):
             raise ValidationError("Parameter `account`can not be None")
         if args.page_index < 0:
             raise ValidationError("Parameter `page_index` must be greater than or equal to 0")
-        if args.page_job_number <=0:
-            raise ValidationError("Parameter `page_job_number` must be greater than 1")
+        if args.page_job_number <= 0:
+            raise ValidationError("Parameter `page_job_number` must be greater than 0")
 
         job_filter = None
         if (args.my):
