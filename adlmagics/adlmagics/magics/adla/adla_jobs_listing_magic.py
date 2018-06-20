@@ -46,7 +46,7 @@ class AdlaJobsListingMagic(AdlaMagicBase):
             html += "            <td>%s</td>" % (job.submitter)
             html += "            <td>%s</td>" % (job.state)
             html += "            <td>%s</td>" % (job.result)
-            html += "            <td><a href='https://%s.azuredatalakeanalytics.net/jobLink/%s' target='_blank'>View Job</a></td>" % (args.account, job.id)
+            html += "            <td><a href='https://%s.azuredatalakeanalytics.net/jobs/%s' target='_blank'>View Job</a></td>" % (args.account, job.id)
             html += "        </tr>"
         html += "    </tbody>"
         html += "</table>"
