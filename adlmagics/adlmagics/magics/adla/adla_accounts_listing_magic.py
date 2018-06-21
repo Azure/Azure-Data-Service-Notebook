@@ -12,9 +12,11 @@ class AdlaAccountsListingMagic(AdlaMagicBase):
     def execute(self, arg_string, content_string):
         args = parse_argstring(self.execute, arg_string)
 
+        if args.page_index < 0:
+            raise ValidationError("Parameter `page_index` must be greater than or equal to 0")
         if args.page_account_number <= 0:
             raise ValidationError("Parameter `page_account_number` must be greater than 0")
-            
+
         self._write_line("Listing azure data lake analytics accounts...")
 
         adla_acounts = self._adla_service.retrieve_accounts(page_index = args.page_index, page_account_number = args.page_account_number)
