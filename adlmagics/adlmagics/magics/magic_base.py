@@ -17,11 +17,8 @@ class MagicBase:
         display(HTML(html_string))
 
     def _convert_to_df(self, models):
-        if (not models):
-            return DataFrame()
+        if (not models or len(models) == 0):
+            return []
 
-        if (len(models) == 0):
-            return DataFrame()
-        
         property_names = [property_name for property_name in models[0].__dict__ if not property_name.startswith("_")]
         return DataFrame([[getattr(model, property_name) for property_name in property_names] for model in models], columns = property_names)
