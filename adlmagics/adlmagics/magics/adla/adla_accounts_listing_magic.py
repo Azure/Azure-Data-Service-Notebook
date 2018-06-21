@@ -1,7 +1,7 @@
 from IPython.core.magic_arguments import magic_arguments, argument, parse_argstring
 
 from adlmagics.magics.adla.adla_magic_base import AdlaMagicBase
-
+from adlmagics.exceptions import ValidationError
 class AdlaAccountsListingMagic(AdlaMagicBase):
     def __init__(self, adla_service):
         super(AdlaAccountsListingMagic, self).__init__("listaccounts", adla_service)
@@ -11,6 +11,11 @@ class AdlaAccountsListingMagic(AdlaMagicBase):
     @argument("--page_account_number", type = int, default = 5, help = "Number of accounts per page, default value: 5.")
     def execute(self, arg_string, content_string):
         args = parse_argstring(self.execute, arg_string)
+
+        if args.page_index < 0:
+            raise ValidationError("Parameter `page_index` must be greater than or equal to 0")
+        if args.page_account_number <= 0:
+            raise ValidationError("Parameter `page_account_number` must be greater than 0")
 
         self._write_line("Listing azure data lake analytics accounts...")
 

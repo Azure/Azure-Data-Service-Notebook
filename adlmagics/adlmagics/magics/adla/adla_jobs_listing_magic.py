@@ -2,7 +2,7 @@ from IPython.core.magic_arguments import magic_arguments, argument, parse_argstr
 from os import linesep
 
 from adlmagics.magics.adla.adla_magic_base import AdlaMagicBase
-
+from adlmagics.exceptions import ValidationError
 class AdlaJobsListingMagic(AdlaMagicBase):
     def __init__(self, adla_service):
         super(AdlaJobsListingMagic, self).__init__("listjobs", adla_service)
@@ -14,6 +14,13 @@ class AdlaJobsListingMagic(AdlaMagicBase):
     @argument("--page_job_number", type = int, default = 5, help = "Number of jobs per page, default value: 5.")
     def execute(self, arg_string, content_string = None):
         args = parse_argstring(self.execute, arg_string)
+
+        if not args.account or args.account.strip() == "":
+            raise ValidationError("Parameter `account`can not be None")
+        if args.page_index < 0:
+            raise ValidationError("Parameter `page_index` must be greater than or equal to 0")
+        if args.page_job_number <= 0:
+            raise ValidationError("Parameter `page_job_number` must be greater than 0")
 
         job_filter = None
         if (args.my):
@@ -46,7 +53,7 @@ class AdlaJobsListingMagic(AdlaMagicBase):
             html += "            <td>%s</td>" % (job.submitter)
             html += "            <td>%s</td>" % (job.state)
             html += "            <td>%s</td>" % (job.result)
-            html += "            <td><a href='https://%s.azuredatalakeanalytics.net/jobLink/%s' target='_blank'>View Job</a></td>" % (args.account, job.id)
+            html += "            <td><a href='https://%s.azuredatalakeanalytics.net/jobs/%s' target='_blank'>View Job</a></td>" % (args.account, job.id)
             html += "        </tr>"
         html += "    </tbody>"
         html += "</table>"

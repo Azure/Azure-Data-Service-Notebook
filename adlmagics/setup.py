@@ -3,7 +3,7 @@ import setuptools
 name             = "adlmagics"
 description      = "Azure Data Lake management magics for Jupyter Notebook"
 long_description = ""
-version          = "0.0.1a0"
+version          = "0.0.1a2"
 packages         = ["adlmagics",
                     "adlmagics/magics/adla",
                     "adlmagics/magics/adls",
@@ -49,6 +49,6 @@ setuptools.setup(
     "numpy",
     "adal",
     "azure-mgmt-resource",
-    "azure-mgmt-datalake-analytics",
+    "azure-mgmt-datalake-analytics>=0.4.0", # for fix bug that 'DataLakeAnalyticsAccountManagementClient' object has no attribute 'account'
     "azure-mgmt-datalake-store",
     "azure-datalake-store"])

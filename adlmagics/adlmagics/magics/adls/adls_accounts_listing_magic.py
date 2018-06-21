@@ -13,6 +13,9 @@ class AdlsAccountsListingMagic(AdlsMagicBase):
         args = parse_argstring(self.execute, arg_string)
 
         self._write_line("Listing azure data lake store accounts...")
+        if args.page_index < 0:
+            self._write_line("0 azure data lake store account(s) listed, because of the page_index is a negative number (we do not process it)!")
+            return []
 
         adls_acounts = self._adls_service.retrieve_accounts(page_index = args.page_index, page_account_number = args.page_account_number)
 
