@@ -1,29 +1,38 @@
-from IPython.core.display import display, HTML
-from sys import stdout
-from os import linesep
 from pandas import DataFrame
-from pandas.core.config import set_option
+
+from adlmagics.session_consts import session_null_value
+from adlmagics.exceptions import MagicArgumentError
 
 class MagicBase:
-    def __init__(self, cmd_name):
+    def __init__(self, cmd_name, session_service, presenter_factory, result_converter):
         self.cmd_name = cmd_name
+        self._session_service = session_service
+        self._presenter_factory = presenter_factory
+        self._result_converter = result_converter
 
-    def _write_line(self, text = None):
-        if (text):
-            stdout.write(text + linesep)
-        else:
-            stdout.write(linesep)
+    def execute(self, arg_string, content_string):
+        pass
 
-    def _write_html(self, html_string):
-        display(HTML(html_string))
+    def _validate_arg(self, args, arg_name, session_item_name):
+        if (not getattr(args, arg_name)):
+            sessioned_value = self._session_service.get_session_item(session_item_name)
+            if (session_null_value == sessioned_value):
+                raise MagicArgumentError("Please specify argument '%s' or use setsession magic to set a value for session item '%s'" % (arg_name, session_item_name))
+            else:
+                setattr(args, arg_name, sessioned_value)
 
-    def _convert_to_df(self, models):
-        if (not models or len(models) == 0):
-            return []
+    def _present(self, obj):
+        presenters = self._presenter_factory.get_presenters(type(obj))
+        if (not presenters) or len(presenters) == 0:
+            return
 
-        property_names = [property_name for property_name in models[0].__dict__ if not property_name.startswith("_")]
+        for presenter in presenters:
+            presenter.present(obj)
+
+    def _convert_result(self, result):
+        converted = self._result_converter.convert(result)
+
+        if converted is DataFrame:
+            self._present("The result is pandas' DataFrame, you can call functions accordingly.")
         
-        
-        set_option('display.max_rows', None)
-        return DataFrame([[getattr(model, property_name) for property_name in property_names] for model in models], columns = property_names)
-        
+        return converted

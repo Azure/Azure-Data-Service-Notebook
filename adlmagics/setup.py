@@ -3,22 +3,22 @@ import setuptools
 name             = "adlmagics"
 description      = "Azure Data Lake management magics for Jupyter Notebook"
 long_description = ""
-version          = "0.0.1a2"
-packages         = ["adlmagics",
-                    "adlmagics/magics/adla",
-                    "adlmagics/magics/adls",
-                    "adlmagics/magics/azure",
-                    "adlmagics/magics/session",
-                    "adlmagics/models",
-                    "adlmagics/services"]
+version          = ""
 author           = "Vincent Feng"
 author_email     = "ivincentfeng@live.com"
 url              = "https://github.com/Azure/Azure-Data-Service-Notebook"
 download_url     = "https://github.com/Azure/Azure-Data-Service-Notebook"
 license          = "MIT"
 
-with open("README.md", "r") as f:
+with open("../README.md", "r") as f:
     long_description = f.read()
+
+version_file = read("adlmagics/version.py")
+version_match = re.search(r"""^adlmagics_version = ['"]([^'"]*)['"]""", version_file)
+if version_match:
+    version = version_match.group(1)
+else:
+    raise RuntimeError("Unable to find version string.")
 
 setuptools.setup(
   name = name,

@@ -20,7 +20,7 @@ class AdlsServiceSdkImpl:
     def __init__(self, token_service):
         self.__token_service = token_service
 
-    def retrieve_accounts(self, page_index, page_account_number):
+    def retrieve_accounts(self):
         if (not self.__token_service.logged_in_user):
             raise UserNotLoggedInError()
 
@@ -31,10 +31,7 @@ class AdlsServiceSdkImpl:
             dls_client = DataLakeStoreAccountManagementClient(self.__token_service.credentials, sub.subscription_id)
             accounts.extend([AdlsAccount(account.name) for account in dls_client.accounts.list()])
 
-        accounts.sort(key = lambda account: getattr(account, "name"))
-            
-        skipped_account_number = page_index * page_account_number
-        return accounts[skipped_account_number : skipped_account_number + page_account_number]
+        return accounts
 
     def retrieve_files(self, account, folder_path):
         if (not self.__token_service.logged_in_user):

@@ -1,29 +1,14 @@
-from IPython.core.magic_arguments import magic_arguments, argument, parse_argstring
-
 from adlmagics.magics.adla.adla_magic_base import AdlaMagicBase
-from adlmagics.exceptions import ValidationError
+
 class AdlaAccountsListingMagic(AdlaMagicBase):
-    def __init__(self, adla_service):
-        super(AdlaAccountsListingMagic, self).__init__("listaccounts", adla_service)
+    def __init__(self, session_service, presenter_factory, result_converter, adla_service):
+        super(AdlaAccountsListingMagic, self).__init__("listaccounts", session_service, presenter_factory, result_converter, adla_service)
 
-    @magic_arguments()
-    @argument("--page_index", type = int, default = 0, help = "Paging index, starting from 0, default value: 0.")
-    @argument("--page_account_number", type = int, default = 5, help = "Number of accounts per page, default value: 5.")
     def execute(self, arg_string, content_string):
-        args = parse_argstring(self.execute, arg_string)
+        self._present("Listing azure data lake analytics accounts...")
 
-        if args.page_index < 0:
-            raise ValidationError("Parameter `page_index` must be greater than or equal to 0")
-        if args.page_account_number <= 0:
-            raise ValidationError("Parameter `page_account_number` must be greater than 0")
+        adla_acounts = self._adla_service.retrieve_accounts()
 
-        self._write_line("Listing azure data lake analytics accounts...")
-
-        adla_acounts = self._adla_service.retrieve_accounts(page_index = args.page_index, page_account_number = args.page_account_number)
-
-        self._write_line("(%d) azure data lake analytics account(s) listed." % (len(adla_acounts)))
+        self._present("(%d) azure data lake analytics account(s) listed." % (len(adla_acounts)))
         
-        for account in adla_acounts:
-            self._write_line("%s" % (account.name))
-
-        return self._convert_to_df(adla_acounts)
+        return self._convert_result(adla_acounts)

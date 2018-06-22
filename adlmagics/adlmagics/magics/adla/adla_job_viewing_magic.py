@@ -1,31 +1,31 @@
 from IPython.core.magic_arguments import magic_arguments, argument, parse_argstring
 
 from adlmagics.magics.adla.adla_magic_base import AdlaMagicBase
+from adlmagics.session_consts import session_adla_account
+from adlmagics.exceptions import MagicArgumentMissingError
 
 class AdlaJobViewingMagic(AdlaMagicBase):
-    def __init__(self, adla_service):
-        super(AdlaJobViewingMagic, self).__init__("viewjob", adla_service)
+    def __init__(self, session_service, presenter_factory, result_converter, adla_service):
+        super(AdlaJobViewingMagic, self).__init__("viewjob", session_service, presenter_factory, result_converter, adla_service)
 
     @magic_arguments()
     @argument("--account", type = str, help = "Azure data lake account name.")
     @argument("--job_id", type = str, help = "Azure data lake job id.")
-    def execute(self, arg_string, content_string = None):
+    def execute(self, arg_string, content_string):
         args = parse_argstring(self.execute, arg_string)
 
-        self._write_line("Viewing azure data lake job by id '%s' under account '%s'..." % (args.job_id, args.account))
+        self.__validate_args(args)
+
+        self._present("Viewing azure data lake job by id '%s' under account '%s'..." % (args.job_id, args.account))
 
         job = self._adla_service.retrieve_job(args.account, args.job_id)
 
-        self._write_line("Azure data lake job info:")
-        self._write_line("\tName: %s" % (job.name))
-        self._write_line("\tType: %s" % (job.type))
-        self._write_line("\tSubmitter: %s" % (job.submitter))
-        self._write_line("\tParallelism: %d" % (job.parallelism))
-        self._write_line("\tPriority: %d" % (job.priority))
-        self._write_line("\tSubmit time: %s" % (str(job.submit_time)))
-        self._write_line("\tStart time: %s" % (str(job.start_time)))
-        self._write_line("\tEnd time: %s" % (str(job.end_time)))
-        self._write_line("\tState: %s" % (job.state))
-        self._write_line("\tResult: %s" % (job.result))
+        self._present(job)
 
-        return self._convert_to_df([job])
+        return self._convert_result(job)
+    
+    def __validate_args(self, args):
+        self._validate_arg(args, "account", session_adla_account.name)
+
+        if not args.job_id:
+            raise MagicArgumentMissingError("job_id")
