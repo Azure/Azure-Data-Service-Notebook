@@ -4,7 +4,7 @@ Azure Data Service Notebook is a set of extentions for working with Azure Data S
 
 **WARNING**: This SDK/CLI is currently in very early stage of development. It can and will change in backwards incompatible ways. 
 
-Latest Version: `0.0.1a0` 
+Latest Version: `0.0.1a2` 
 # Feature
 Azure Data Service Notebook currently provides a set of [Jupyter Magic Functions](https://ipython.readthedocs.io/en/stable/interactive/tutorial.html?#magic-functions) for users to access Azure Data Lake. Available magics are captured in the table below. Please click on the command name to see the syntax reference.
 
