@@ -3,6 +3,8 @@ from os import linesep
 
 from adlmagics.magics.adla.adla_magic_base import AdlaMagicBase
 from adlmagics.exceptions import ValidationError
+
+from adlmagics.magics.adla.adla_consts import DEFAULT_MAX_REQ_NUMBER
 class AdlaJobsListingMagic(AdlaMagicBase):
     def __init__(self, adla_service):
         super(AdlaJobsListingMagic, self).__init__("listjobs", adla_service)
@@ -19,9 +21,9 @@ class AdlaJobsListingMagic(AdlaMagicBase):
             raise ValidationError("Parameter `account`can not be None")
         if args.page_index < 0:
             raise ValidationError("Parameter `page_index` must be greater than or equal to 0")
-        if args.page_job_number <= 0:
-            raise ValidationError("Parameter `page_job_number` must be greater than 0")
-
+        if args.page_job_number <= 0 or args.page_job_number > DEFAULT_MAX_REQ_NUMBER:
+            raise ValidationError("Parameter `page_job_number` must be greater than 0 and less than or equals to {0}".format(DEFAULT_MAX_REQ_NUMBER))
+        
         job_filter = None
         if (args.my):
             job_filter = "submitter eq '%s'" % (self._adla_service.logged_in_user)
