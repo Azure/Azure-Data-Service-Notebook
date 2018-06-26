@@ -2,7 +2,7 @@
     "python.unitTest.unittestArgs": [
         "-v",
         "-s",
-        "./adlmagics/test",
+        "./adlmagics/test/testcases",
         "-p",
         "*_test.py"
     ],

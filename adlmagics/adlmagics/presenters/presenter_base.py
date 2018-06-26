@@ -1,10 +1,7 @@
 class PresenterBase:
-    def __init__(self, target_type):
-        self.__target_type = target_type
-
-    def present(self, obj):
+    def is_presentable(self, obj):
         pass
-
-    @property
-    def target_type(self):
-        return self.__target_type
+    
+    def present(self, obj):
+        if not self.is_presentable(obj):
+            raise ValueError("Type '%s' is not presentable by '%s'" % (type(obj).__name__, PresenterBase.__name__))

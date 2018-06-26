@@ -2,16 +2,18 @@ from adlmagics.presenters.presenter_base import PresenterBase
 
 class PresenterFactory:
     def __init__(self):
-        self.__presenters = dict()
+        self.__presenters = []
 
-    def register_presenter(self, target_type, presenter):
-        if (not target_type) or (not presenter) or (not presenter is PresenterBase):
+    def register_presenter(self, presenter):
+        if not isinstance(presenter, PresenterBase):
             return
 
-        self.__presenters.setdefault(target_type, []).append(presenter)
+        self.__presenters.append(presenter)
 
-    def get_presenters(self, target_type):
-        if (not target_type):
-            return []
+    def present(self, obj):
+        if (not obj):
+            return
 
-        return self.__presenters.setdefault(target_type, [])
+        for presenter in self.__presenters:
+            if presenter.is_presentable(obj):
+                presenter.present(obj)

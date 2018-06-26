@@ -4,9 +4,8 @@ from adlmagics.magics.session.session_magic_base import SessionMagicBase
 from adlmagics.exceptions import MagicArgumentMissingError, MagicArgumentError
 
 class SessionItemSettingMagic(SessionMagicBase):
-    def __init__(self, cmd_name, session_service, presenter_factory, result_converter):
-        super(SessionListingMagic, self).__init__("setsessionitem", session_service, presenter_factory, result_converter)
-        
+    def __init__(self, cmd_name, session_service, presenter_factory):
+        super(SessionListingMagic, self).__init__("setsessionitem", session_service, presenter_factory)
     
     @magic_arguments()
     @argument("--name", type = str, help = "Session item name.")
@@ -18,7 +17,6 @@ class SessionItemSettingMagic(SessionMagicBase):
 
         for session_item_name in self._session_service.session_item_names:
             self._present("%s : %s" % (session_item_name, self._session_service.get_session_item(session_item_name)))
-        
 
     def __validate_args(self, args):
         if not args.name:

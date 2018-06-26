@@ -1,23 +1,17 @@
 from IPython.core.display import display, HTML
 
-from adlmagics.interfaces.presenter_base import PresenterBase
+from adlmagics.presenters.presenter_base import PresenterBase
 from adlmagics.models.adls_folder import AdlsFolder
 
 class AdlsFoldersPresenter(PresenterBase):
-    def __init__(self):
-        super(AdlsFoldersPresenter, self).__init__(AdlsFoldersPresenter)
+    def is_presentable(self, obj):
+        return (obj is list) and all(isinstance(f, AdlsFolder) for f in obj)
 
     def present(self, obj):
-        if (not obj) or (not obj is list):
-            return
-
-        folders = obj as list
-
-        if not all(isinstance(f, AdlsFolder) for f in folders):
-            return
+        super(AdlsFoldersPresenter, self).present(obj)
 
         html = "<table>"
-        html += "    <caption>%d datalake store folder(s) listed</caption>" % (len(folders))
+        html += "    <caption>%d datalake store folder(s) listed</caption>" % (len(obj))
         html += "    <thead>"
         html += "        <tr>"
         html += "            <th>Folder Name</th>"
@@ -27,12 +21,12 @@ class AdlsFoldersPresenter(PresenterBase):
         html += "        </tr>"
         html += "    </thead>"
         html += "    <tbody>"
-        for f in folders:
+        for folder in obj:
             html += "        <tr>"
-            html += "            <td>%s</td>" % (f.name)
-            html += "            <td>%s</td>" % (str(f.last_access_time))
-            html += "            <td>%s</td>" % (str(f.last_modified_time))
-            html += "            <td>%s</td>" % (f.path)
+            html += "            <td>%s</td>" % (folder.name)
+            html += "            <td>%s</td>" % (str(folder.last_access_time))
+            html += "            <td>%s</td>" % (str(folder.last_modified_time))
+            html += "            <td>%s</td>" % (folder.path)
             html += "        </tr>"
         html += "    </tbody>"
         html += "</table>"

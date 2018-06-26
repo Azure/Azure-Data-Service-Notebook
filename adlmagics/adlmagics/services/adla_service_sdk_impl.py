@@ -16,7 +16,7 @@ class AdlaServiceSdkImpl:
         self.__token_service = token_service
 
     def retrieve_accounts(self):
-        if (not self.__token_service.logged_in_user):
+        if not self.__token_service.logged_in_user:
             raise UserNotLoggedInError()
 
         accounts = []
@@ -29,7 +29,7 @@ class AdlaServiceSdkImpl:
         return accounts
 
     def submit_job(self, account, job_submission):
-        if (not self.__token_service.logged_in_user):
+        if not self.__token_service.logged_in_user:
             raise UserNotLoggedInError()
 
         job_id = str(uuid4())
@@ -43,7 +43,7 @@ class AdlaServiceSdkImpl:
         return AdlaJob(job.job_id, job.name, job.type.name, job.submitter, job.degree_of_parallelism, job.priority, job.submit_time, job.start_time, job.end_time, job.state.name, job.result.name)
 
     def retrieve_job(self, account, job_id):
-        if (not self.__token_service.logged_in_user):
+        if not self.__token_service.logged_in_user:
             raise UserNotLoggedInError()
 
         job_client = DataLakeAnalyticsJobManagementClient(self.__token_service.credentials, AdlaServiceSdkImpl.__adla_job_dns_suffix)
@@ -53,7 +53,7 @@ class AdlaServiceSdkImpl:
         return AdlaJob(job.job_id, job.name, job.type.name, job.submitter, job.degree_of_parallelism, job.priority, job.submit_time, job.start_time, job.end_time, job.state.name, job.result.name)
 
     def retrieve_jobs(self, account, filter, page_index, page_job_number):
-        if (not self.__token_service.logged_in_user):
+        if not self.__token_service.logged_in_user:
             raise UserNotLoggedInError()
 
         job_client = DataLakeAnalyticsJobManagementClient(self.__token_service.credentials, AdlaServiceSdkImpl.__adla_job_dns_suffix)
@@ -65,7 +65,3 @@ class AdlaServiceSdkImpl:
         jobs = job_client.job.list(account, filter = filter, top = page_job_number, skip = skip)
 
         return [AdlaJob(job.job_id, job.name, job.type.name, job.submitter, job.degree_of_parallelism, job.priority, job.submit_time, job.start_time, job.end_time, job.state.name, job.result.name) for job in jobs]
-
-    @property
-    def logged_in_user(self):
-        return self.__token_service.logged_in_user

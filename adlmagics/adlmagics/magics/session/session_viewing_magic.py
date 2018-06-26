@@ -1,8 +1,8 @@
 from adlmagics.magics.session.session_magic_base import SessionMagicBase
 
 class SessionViewingMagic(SessionMagicBase):
-    def __init__(self, session_service, presenter_factory, result_converter):
-        super(SessionListingMagic, self).__init__("viewsession", session_service, presenter_factory, result_converter)
+    def __init__(self, session_service, presenter_factory):
+        super(SessionListingMagic, self).__init__("viewsession", session_service, presenter_factory)
         
     def execute(self, arg_string, content_string):
         self._present("Session items:")

@@ -1,11 +1,10 @@
 from adlmagics.magics.azure.azure_magic_base import AzureMagicBase
 
-from adlmagics.converters.quiet_converter import QuietConverter
 from adlmagics.session_consts import session_null_value
 
 class AzureLogoutMagic(AzureMagicBase):
-    def __init__(self, session_service, presenter_factory, result_converter, token_service):
-        super(AzureLogoutMagic, self).__init__("logout", session_service, presenter_factory, result_converter, token_service)
+    def __init__(self, session_service, presenter_factory, token_service):
+        super(AzureLogoutMagic, self).__init__("logout", session_service, presenter_factory, token_service)
 
     def execute(self, arg_string, content_string = None):
         tenant = self._token_service.tenant

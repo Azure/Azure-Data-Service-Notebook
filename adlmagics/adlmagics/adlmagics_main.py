@@ -5,9 +5,7 @@ from os.path import join, expanduser
 
 from adlmagics.version import adlmagics_version
 
-from adlmagics.converters.matrix_to_dataframe_converter import MatrixToDataFrameConverter
-from adlmagics.converters.object_to_dataframe_converter import ObjectToDataFrameConverter
-from adlmagics.converters.quiet_converter import QuietConverter
+from adlmagics.converters.dataframe_converter import DataFrameConverter
 
 from adlmagics.utils.json_file_persister import JsonFilePersister
 
@@ -91,47 +89,45 @@ class AdlMagics(Magics):
         self.__presenter_factory.register_presenter(presenter.target_type, presenter)
     
     def __initialize_magics(self):
-        quiet_converter = QuietConverter()
-        object_to_df_converter = ObjectToDataFrameConverter()
-        matrix_to_df_converter = MatrixToDataFrameConverter()
+        df_converter = DataFrameConverter()
         
         self.__magics = dict()
 
-        self.__register_session_magic(SessionViewingMagic, quiet_converter)
-        self.__register_session_magic(SessionItemSettingMagic, quiet_converter)
+        self.__register_session_magic(SessionViewingMagic)
+        self.__register_session_magic(SessionItemSettingMagic)
         
-        self.__register_azure_magic(AzureLoginMagic, quiet_converter)
-        self.__register_azure_magic(AzureLogoutMagic, quiet_converter)
+        self.__register_azure_magic(AzureLoginMagic)
+        self.__register_azure_magic(AzureLogoutMagic)
 
-        self.__register_adla_magic(AdlaAccountsListingMagic, object_to_df_converter)
-        self.__register_adla_magic(AdlaJobSubmissionMagic, object_to_df_converter)
-        self.__register_adla_magic(AdlaJobViewingMagic, object_to_df_converter)
-        self.__register_adla_magic(AdlaJobsListingMagic, object_to_df_converter)
+        self.__register_adla_magic(AdlaAccountsListingMagic, df_converter)
+        self.__register_adla_magic(AdlaJobSubmissionMagic, df_converter)
+        self.__register_adla_magic(AdlaJobViewingMagic, df_converter)
+        self.__register_adla_magic(AdlaJobsListingMagic, df_converter)
 
-        self.__register_adls_magic(AdlsAccountsListingMagic, object_to_df_converter)
-        self.__register_adls_magic(AdlsFoldersListingMagic, object_to_df_converter)
-        self.__register_adls_magic(AdlsFilesListingMagic, object_to_df_converter)
-        self.__register_adls_magic(AdlsFileSamplingMagic, matrix_to_df_converter())
+        self.__register_adls_magic(AdlsAccountsListingMagic, df_converter)
+        self.__register_adls_magic(AdlsFoldersListingMagic, df_converter)
+        self.__register_adls_magic(AdlsFilesListingMagic, df_converter)
+        self.__register_adls_magic(AdlsFileSamplingMagic, df_converter)
 
-    def __register_session_magic(self, session_magic_class, result_converter):
+    def __register_session_magic(self, session_magic_class):
         if (not issubclass(session_magic_class, SessionMagicBase)):
             raise TypeError("%s not a session magic class." % (session_magic_class.__name__))
 
-        session_magic = session_magic_class(self.__session_service, self.__presenter_factory, result_converter)
+        session_magic = session_magic_class(self.__session_service, self.__presenter_factory)
         self.__magics[session_magic.cmd_name.lower()] = session_magic
     
-    def __register_azure_magic(self, azure_magic_class, result_converter):
+    def __register_azure_magic(self, azure_magic_class):
         if (not issubclass(azure_magic_class, AzureMagicBase)):
             raise TypeError("%s not a azure magic class." % (azure_magic_class.__name__))
 
-        azure_magic = azure_magic_class(self.__session_service, self.__presenter_factory, result_converter, self.__token_service)
+        azure_magic = azure_magic_class(self.__session_service, self.__presenter_factory, self.__token_service)
         self.__magics[azure_magic.cmd_name.lower()] = azure_magic
 
     def __register_adla_magic(self, adla_magic_class, result_converter):
         if (not issubclass(adla_magic_class, AdlaMagicBase)):
             raise TypeError("%s not a adla magic class." % (adla_magic_class.__name__))
 
-        adla_magic = adla_magic_class(self.__session_service, self.__presenter_factory, object_to_df_converter, self.__adla_service)
+        adla_magic = adla_magic_class(self.__session_service, self.__presenter_factory, result_converter, self.__adla_service)
         self.__magics[adla_magic.cmd_name.lower()] = adla_magic
 
     def __register_adls_magic(self, adls_magic_class, result_converter):

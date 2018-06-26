@@ -1,31 +1,28 @@
 from sys import stdout
 from os import linesep
 
-from adlmagics.interfaces.presenter_base import PresenterBase
+from adlmagics.presenters.presenter_base import PresenterBase
 from adlmagics.models.adla_job import AdlaJob
 
 class AdlaJobPresenter(PresenterBase):
-    def __init__(self):
-        super(AdlaJobPresenter, self).__init__(AdlaJob)
+    def is_presentable(self, obj):
+        return isinstance(obj, AdlaJob)
 
     def present(self, obj):
-        if (not obj) or (not obj is AdlaJob):
-            return
-
-        job = obj as AdlaJob
+        super(AdlaJobPresenter, self).present(obj)
 
         self.__write_line("Job info:")
-        self.__write_line("  Id: %s" % (job.id))
-        self.__write_line("  Name: %s" % (job.name))
-        self.__write_line("  Type: %s" % (job.type))
-        self.__write_line("  Submitter: %s" % (job.submitter))
-        self.__write_line("  Parallelism: %d" % (job.parallelism))
-        self.__write_line("  Priority: %d" % (job.priority))
-        self.__write_line("  Submit time: %s" % (str(job.submit_time)))
-        self.__write_line("  Start time: %s" % (str(job.start_time)))
-        self.__write_line("  End time: %s" % (str(job.end_time)))
-        self.__write_line("  State: %s" % (job.state))
-        self.__write_line("  Result: %s" % (job.result))
+        self.__write_line("  Id: %s" % (obj.id))
+        self.__write_line("  Name: %s" % (obj.name))
+        self.__write_line("  Type: %s" % (obj.type))
+        self.__write_line("  Submitter: %s" % (obj.submitter))
+        self.__write_line("  Parallelism: %d" % (obj.parallelism))
+        self.__write_line("  Priority: %d" % (obj.priority))
+        self.__write_line("  Submit time: %s" % (str(obj.submit_time)))
+        self.__write_line("  Start time: %s" % (str(obj.start_time)))
+        self.__write_line("  End time: %s" % (str(obj.end_time)))
+        self.__write_line("  State: %s" % (obj.state))
+        self.__write_line("  Result: %s" % (obj.result))
 
     def __write_line(self, text):
         stdout.write(text + linesep)

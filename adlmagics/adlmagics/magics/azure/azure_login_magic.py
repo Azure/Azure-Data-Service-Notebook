@@ -4,8 +4,8 @@ from adlmagics.magics.azure.azure_magic_base import AzureMagicBase
 from adlmagics.session_consts import session_tenant, session_user
 
 class AzureLoginMagic(AzureMagicBase):
-    def __init__(self, session_service, presenter_factory, result_converter, token_service):
-        super(AzureLoginMagic, self).__init__("login", session_service, presenter_factory, result_converter, token_service)
+    def __init__(self, session_service, presenter_factory, token_service):
+        super(AzureLoginMagic, self).__init__("login", session_service, presenter_factory, token_service)
 
     @magic_arguments()
     @argument("--tenant", type = str, help = "Azure tenant name or id.")

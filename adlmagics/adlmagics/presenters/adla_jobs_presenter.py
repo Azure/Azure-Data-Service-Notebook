@@ -1,23 +1,17 @@
 from IPython.core.display import display, HTML
 
-from adlmagics.interfaces.presenter_base import PresenterBase
+from adlmagics.presenters.presenter_base import PresenterBase
 from adlmagics.models.adla_job import AdlaJob
 
 class AdlaJobsPresenter(PresenterBase):
-    def __init__(self):
-        super(AdlaJobsPresenter, self).__init__(AdlaJobsPresenter)
+    def is_presentable(self, obj):
+        return isinstance(obj, list) and all(isinstance(job, AdlaJob) for job in obj)
 
     def present(self, obj):
-        if (not obj) or (not obj is list):
-            return
-
-        jobs = obj as list
-
-        if not all(isinstance(job, AdlaJob) for job in jobs):
-            return
+        super(AdlaJobsPresenter, self).present(obj)
 
         html = "<table>"
-        html += "    <caption>%d datalake analytics job(s) listed</caption>" % (len(jobs))
+        html += "    <caption>%d datalake analytics job(s) listed</caption>" % (len(obj))
         html += "    <thead>"
         html += "        <tr>"
         html += "            <th>Job Name</th>"
@@ -28,7 +22,7 @@ class AdlaJobsPresenter(PresenterBase):
         html += "        </tr>"
         html += "    </thead>"
         html += "    <tbody>"
-        for job in jobs:
+        for job in obj:
             job_details = "Parallelism: %d%s" % (job.parallelism, linesep)
             job_details += "Priority: %d%s" % (job.priority, linesep)
             job_details += "Submit Time: %s%s" % (str(job.submit_time), linesep)

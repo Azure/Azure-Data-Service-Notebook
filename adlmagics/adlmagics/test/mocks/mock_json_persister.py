@@ -1,6 +1,6 @@
 from json import loads, dumps
 
-class JsonMemPersister:
+class MockJsonPersister:
     def __init__(self):
         self.__json = "{}"
 
@@ -9,5 +9,3 @@ class JsonMemPersister:
 
     def save(self, obj):
         self.__json = dumps(obj, ensure_ascii = False)
-
-    

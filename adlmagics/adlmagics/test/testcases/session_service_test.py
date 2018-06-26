@@ -1,10 +1,9 @@
 import unittest
-from os import remove
 
 from adlmagics.services.session_service import SessionService
 from adlmagics.session_consts import *
 
-from adlmagics.test.json_mem_persister import JsonMemPersister
+from adlmagics.test.mocks.mock_json_persister import MockJsonPersister
 
 class SessionServiceTest(unittest.TestCase):
     def test_get_session_item_post_initialization(self):
@@ -54,10 +53,9 @@ class SessionServiceTest(unittest.TestCase):
 
             session_file_encoding.name
         ])
-
     
     def setUp(self):
-        self.__session_service = SessionService(JsonMemPersister())
+        self.__session_service = SessionService(MockJsonPersister())
 
     def tearDown(self):
         self.__session_service = None

@@ -1,23 +1,17 @@
 from IPython.core.display import display, HTML
 
-from adlmagics.interfaces.presenter_base import PresenterBase
+from adlmagics.presenters.presenter_base import PresenterBase
 from adlmagics.models.adls_file import AdlsFile
 
 class AdlsFilesPresenter(PresenterBase):
-    def __init__(self):
-        super(AdlsFilesPresenter, self).__init__(AdlsFilesPresenter)
+    def is_presentable(self, obj):
+        return isinstance(obj, list) and all(isinstance(f, AdlsFile) for f in obj)
 
     def present(self, obj):
-        if (not obj) or (not obj is list):
-            return
-
-        files = obj as list
-
-        if not all(isinstance(f, AdlsFile) for f in files):
-            return
+        super(AdlsFilesPresenter, self).present(obj)
 
         html = "<table>"
-        html += "    <caption>%d datalake store file(s) listed</caption>" % (len(files))
+        html += "    <caption>%d datalake store file(s) listed</caption>" % (len(obj))
         html += "    <thead>"
         html += "        <tr>"
         html += "            <th>File Name</th>"
@@ -28,7 +22,7 @@ class AdlsFilesPresenter(PresenterBase):
         html += "        </tr>"
         html += "    </thead>"
         html += "    <tbody>"
-        for f in files:
+        for f in obj:
             html += "        <tr>"
             html += "            <td>%s</td>" % (f.name)
             html += "            <td>%s</td>" % (f.size_in_bytes)
