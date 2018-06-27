@@ -8,6 +8,7 @@ from adlmagics.version import adlmagics_version
 from adlmagics.converters.dataframe_converter import DataFrameConverter
 
 from adlmagics.utils.json_file_persister import JsonFilePersister
+from adlmagics.utils.ipshell_result_receiver import IPShellResultReceiver
 
 from adlmagics.presenters.presenter_base import PresenterBase
 from adlmagics.presenters.text_presenter import TextPresenter
@@ -100,9 +101,11 @@ class AdlMagics(Magics):
         self.__register_azure_magic(AzureLogoutMagic)
 
         self.__register_adla_magic(AdlaAccountsListingMagic, df_converter)
-        self.__register_adla_magic(AdlaJobSubmissionMagic, df_converter)
         self.__register_adla_magic(AdlaJobViewingMagic, df_converter)
         self.__register_adla_magic(AdlaJobsListingMagic, df_converter)
+
+        adla_job_submission_magic = AdlaJobSubmissionMagic(self.__session_service, self.__presenter_factory, result_converter, IPShellResultReceiver(), self.__adla_service)
+        self.__magics[adla_job_submission_magic.cmd_name.lower()] = adla_job_submission_magic
 
         self.__register_adls_magic(AdlsAccountsListingMagic, df_converter)
         self.__register_adls_magic(AdlsFoldersListingMagic, df_converter)
