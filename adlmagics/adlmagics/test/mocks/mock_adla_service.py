@@ -21,4 +21,4 @@ class MockAdlaService:
         if not self.__token_service.logged_in_user:
             raise UserNotLoggedInError()
 
-        pass
+        return [AdlaJob(str(uuid4()), "mock_job_name_%d" % (ix), "USql", "mock_submitter", 5, 100, datetime.now(), datetime.now(), datetime.now(), "mock_state", "mock_result") for ix in range(10)]

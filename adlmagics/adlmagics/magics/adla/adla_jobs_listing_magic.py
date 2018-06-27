@@ -2,7 +2,7 @@ from IPython.core.magic_arguments import magic_arguments, argument, parse_argstr
 from os import linesep
 
 from adlmagics.magics.adla.adla_magic_base import AdlaMagicBase
-from adlmagics.session_consts import session_adla_account, session_paging_numberperpage
+from adlmagics.session_consts import session_adla_account, session_user, session_paging_numberperpage
 from adlmagics.exceptions import MagicArgumentError
 
 class AdlaJobsListingMagic(AdlaMagicBase):
@@ -21,7 +21,7 @@ class AdlaJobsListingMagic(AdlaMagicBase):
 
         job_filter = None
         if (args.my):
-            job_filter = "submitter eq '%s'" % (self._adla_service.logged_in_user)
+            job_filter = "submitter eq '%s'" % (self._session_service.get_session_item(session_user.name))
 
         self._present("Listing azure data lake jobs under account '%s'..." % (args.account))
 

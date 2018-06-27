@@ -7,12 +7,20 @@ class MockPresenterFactory:
 
     def present(self, obj):
         text = ""
-        if not isinstance(obj, str):
-            text = type(obj).__name__
-        else:
+        if isinstance(obj, str):
             text = obj
+        elif isinstance(obj, list):
+            if len(obj) > 0:
+                text = "A list of %s" % (type(obj[0]).__name__)
+            else:
+                text = "A list"
+        else:
+            text = type(obj).__name__
 
         self.__presented_logs.append(text)
+
+    def clear(self):
+        self.__presented_logs.clear()
 
     @property
     def presented_logs(self):

@@ -13,6 +13,6 @@ session_job_runtime = SessionItem("job.runtime", "default")
 session_job_priority = SessionItem("job.priority", 100)
 session_job_parallelism = SessionItem("job.parallelism", 5)
 
-session_paging_numberperpage = SessionItem("paging.numberperpage", 10)
+session_paging_numberperpage = SessionItem("paging.numberperpage", 5)
 
 session_file_encoding = SessionItem("file.encoding", "utf-8")

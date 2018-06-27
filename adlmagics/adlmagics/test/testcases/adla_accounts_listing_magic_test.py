@@ -17,3 +17,8 @@ class AdlaAccountsListingMagicTest(AdlaMagicTestBase):
         super(AdlaAccountsListingMagicTest, self).setUp()
 
         self.__magic = AdlaAccountsListingMagic(self._session_service, self._presenter_factory, self._result_converter, self._adla_service)
+
+    def tearDown(self):
+        self.__magic = None
+
+        super(AdlaAccountsListingMagicTest, self).tearDown()
