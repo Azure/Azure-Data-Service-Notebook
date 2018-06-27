@@ -50,5 +50,5 @@ setuptools.setup(
     "adal",
     "azure-mgmt-resource",
     "azure-mgmt-datalake-analytics>=0.4.0", # for fix bug that 'DataLakeAnalyticsAccountManagementClient' object has no attribute 'account'
-    "azure-mgmt-datalake-store",
+    "azure-mgmt-datalake-store>=0.4.0",
     "azure-datalake-store"])
