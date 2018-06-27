@@ -1,6 +1,6 @@
 from adlmagics.magics.azure.azure_magic_base import AzureMagicBase
 
-from adlmagics.session_consts import session_null_value
+from adlmagics.session_consts import session_tenant, session_user, session_null_value
 
 class AzureLogoutMagic(AzureMagicBase):
     def __init__(self, session_service, presenter_factory, token_service):
