@@ -5,7 +5,7 @@ from adlmagics.session_consts import session_adla_account, session_job_paralleli
 from adlmagics.models.adla_job import AdlaJob
 from adlmagics.exceptions import MagicArgumentError, MagicArgumentMissingError
 
-from adlmagics.test.testcases.adla_magic_test_base import AdlaMagicTestBase
+from adlmagics.test.adla_magic_test_base import AdlaMagicTestBase
 
 class AdlaJobSubmissionMagicTest(AdlaMagicTestBase):
     adla_account = "mock_adla_account"
@@ -85,12 +85,10 @@ class AdlaJobSubmissionMagicTest(AdlaMagicTestBase):
         arg_string = "--account %s --name %s --parallelism %d --priority 1 --runtime %s" % (AdlaJobSubmissionMagicTest.adla_account, AdlaJobSubmissionMagicTest.job_name, AdlaJobSubmissionMagicTest.job_parallelism, AdlaJobSubmissionMagicTest.job_runtime)
         submitted_job = self.__magic.execute(arg_string, None)
         self.__validate(submitted_job)
-        self._presenter_factory.clear()
         
         arg_string = "--account %s --name %s --parallelism %d --priority 1000 --runtime %s" % (AdlaJobSubmissionMagicTest.adla_account, AdlaJobSubmissionMagicTest.job_name, AdlaJobSubmissionMagicTest.job_parallelism, AdlaJobSubmissionMagicTest.job_runtime)
         submitted_job = self.__magic.execute(arg_string, None)
         self.__validate(submitted_job)
-        self._presenter_factory.clear()
 
         arg_string = "--account %s --name %s --parallelism %d --priority 1001 --runtime %s" % (AdlaJobSubmissionMagicTest.adla_account, AdlaJobSubmissionMagicTest.job_name, AdlaJobSubmissionMagicTest.job_parallelism, AdlaJobSubmissionMagicTest.job_runtime)
         self.assertRaises(MagicArgumentError, self.__magic.execute, arg_string, None)
@@ -104,12 +102,10 @@ class AdlaJobSubmissionMagicTest(AdlaMagicTestBase):
         self._session_service.set_session_item(session_job_priority.name, 1)
         submitted_job = self.__magic.execute(arg_string, None)
         self.__validate(submitted_job)
-        self._presenter_factory.clear()
 
         self._session_service.set_session_item(session_job_priority.name, 1000)
         submitted_job = self.__magic.execute(arg_string, None)
         self.__validate(submitted_job)
-        self._presenter_factory.clear()
 
         self._session_service.set_session_item(session_job_priority.name, 1001)
         self.assertRaises(MagicArgumentError, self.__magic.execute, arg_string, None)
@@ -144,3 +140,5 @@ class AdlaJobSubmissionMagicTest(AdlaMagicTestBase):
             "Submitting azure data lake job to account '%s'..." % (AdlaJobSubmissionMagicTest.adla_account),
             "Job submitted.",
             AdlaJob.__name__], self._presenter_factory.presented_logs)
+
+        self._presenter_factory.clear()

@@ -5,7 +5,7 @@ from adlmagics.session_consts import session_adla_account, session_paging_number
 from adlmagics.exceptions import MagicArgumentError
 from adlmagics.models.adla_job import AdlaJob
 
-from adlmagics.test.testcases.adla_magic_test_base import AdlaMagicTestBase
+from adlmagics.test.adla_magic_test_base import AdlaMagicTestBase
 
 class AdlaJobsListingMagicTest(AdlaMagicTestBase):
     adla_account = "mock_adla_account"
@@ -15,12 +15,10 @@ class AdlaJobsListingMagicTest(AdlaMagicTestBase):
         arg_string = "--account %s --my --page_index 0 --page_job_number %d" % (AdlaJobsListingMagicTest.adla_account, AdlaJobsListingMagicTest.page_job_number)
         jobs = self.__magic.execute(arg_string, None)
         self.__validate(jobs)
-        self._presenter_factory.clear()
 
         arg_string = "--account %s --page_index 0 --page_job_number %d" % (AdlaJobsListingMagicTest.adla_account, AdlaJobsListingMagicTest.page_job_number)
         jobs = self.__magic.execute(arg_string, None)
         self.__validate(jobs)
-        self._presenter_factory.clear()
 
         arg_string = "--account %s" % (AdlaJobsListingMagicTest.adla_account)
         jobs = self.__magic.execute(arg_string, None)
@@ -85,3 +83,5 @@ class AdlaJobsListingMagicTest(AdlaMagicTestBase):
             "Listing azure data lake jobs under account '%s'..." % (AdlaJobsListingMagicTest.adla_account),
             "(%d) azure data lake job(s) listed." % (len(jobs)),
             "A list of %s" % (AdlaJob.__name__)], self._presenter_factory.presented_logs)
+
+        self._presenter_factory.clear()

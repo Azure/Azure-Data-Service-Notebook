@@ -42,6 +42,9 @@ class AdlsFileSamplingMagic(AdlsMagicBase):
                 raise MagicArgumentMissingError("file_type")
             else:
                 args.file_type = file_ext[1:]
+        args.file_type = args.file_type.lower()
+        if not args.file_type in self.__fileTypeColumnSepMappings:
+            raise MagicArgumentError("Unsupported file type : %s" % (args.file_type))
 
         self._validate_arg(args, "encoding", session_file_encoding.name)
 

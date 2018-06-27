@@ -6,7 +6,7 @@ from adlmagics.models.adla_job import AdlaJob
 from adlmagics.exceptions import MagicArgumentError, MagicArgumentMissingError
 from adlmagics.session_consts import session_adla_account, session_null_value
 
-from adlmagics.test.testcases.adla_magic_test_base import AdlaMagicTestBase
+from adlmagics.test.adla_magic_test_base import AdlaMagicTestBase
 
 class AdlaJobViewingMagicTest(AdlaMagicTestBase):
     adla_account = "mock_adla_account"

@@ -1,6 +1,6 @@
 from adlmagics.magics.adla.adla_accounts_listing_magic import AdlaAccountsListingMagic
 
-from adlmagics.test.testcases.adla_magic_test_base import AdlaMagicTestBase
+from adlmagics.test.adla_magic_test_base import AdlaMagicTestBase
 
 class AdlaAccountsListingMagicTest(AdlaMagicTestBase):
     def test_execute(self):

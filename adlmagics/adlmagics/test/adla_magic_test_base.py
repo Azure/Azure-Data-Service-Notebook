@@ -1,4 +1,4 @@
-from adlmagics.test.testcases.magic_test_base import MagicTestBase
+from adlmagics.test.magic_test_base import MagicTestBase
 from adlmagics.test.mocks.mock_token_service import MockTokenService
 from adlmagics.test.mocks.mock_adla_service import MockAdlaService
 
