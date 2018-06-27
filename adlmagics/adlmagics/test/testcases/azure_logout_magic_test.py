@@ -4,7 +4,7 @@ from adlmagics.session_consts import session_tenant, session_user, session_null_
 from adlmagics.test.azure_magic_test_base import AzureMagicTestBase
 
 class AzureLogoutMagicMagicTest(AzureMagicTestBase):
-    def test_execute_with_correct_arg_string(self):
+    def test_execute(self):
         tenant = self._token_service.tenant
         user = self._token_service.logged_in_user
 
