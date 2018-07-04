@@ -87,7 +87,7 @@ class AdlMagics(Magics):
             raise TypeError("%s not a presenter class." % (presenter_class.__name__))
 
         presenter = presenter_class()
-        self.__presenter_factory.register_presenter(presenter.target_type, presenter)
+        self.__presenter_factory.register_presenter(presenter)
     
     def __initialize_magics(self):
         df_converter = DataFrameConverter()
@@ -104,7 +104,7 @@ class AdlMagics(Magics):
         self.__register_adla_magic(AdlaJobViewingMagic, df_converter)
         self.__register_adla_magic(AdlaJobsListingMagic, df_converter)
 
-        adla_job_submission_magic = AdlaJobSubmissionMagic(self.__session_service, self.__presenter_factory, result_converter, IPShellResultReceiver(), self.__adla_service)
+        adla_job_submission_magic = AdlaJobSubmissionMagic(self.__session_service, self.__presenter_factory, df_converter, IPShellResultReceiver(), self.__adla_service)
         self.__magics[adla_job_submission_magic.cmd_name.lower()] = adla_job_submission_magic
 
         self.__register_adls_magic(AdlsAccountsListingMagic, df_converter)

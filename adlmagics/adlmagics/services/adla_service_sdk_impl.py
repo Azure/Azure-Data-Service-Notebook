@@ -40,7 +40,7 @@ class AdlaServiceSdkImpl:
 
         job = job_client.job.create(account, job_id, job_info)
 
-        return AdlaJob(job.job_id, job.name, job.type.name, job.submitter, job.degree_of_parallelism, job.priority, job.submit_time, job.start_time, job.end_time, job.state.name, job.result.name)
+        return AdlaJob(job.job_id, job.name, job.type.name, job.submitter, job.degree_of_parallelism, job.priority, job.submit_time, job.start_time, job.end_time, job.state.name, job.result.name, account)
 
     def retrieve_job(self, account, job_id):
         if not self.__token_service.logged_in_user:
@@ -50,7 +50,7 @@ class AdlaServiceSdkImpl:
 
         job = job_client.job.get(account, job_id)
 
-        return AdlaJob(job.job_id, job.name, job.type.name, job.submitter, job.degree_of_parallelism, job.priority, job.submit_time, job.start_time, job.end_time, job.state.name, job.result.name)
+        return AdlaJob(job.job_id, job.name, job.type.name, job.submitter, job.degree_of_parallelism, job.priority, job.submit_time, job.start_time, job.end_time, job.state.name, job.result.name, account)
 
     def retrieve_jobs(self, account, filter, page_index, page_job_number):
         if not self.__token_service.logged_in_user:
@@ -64,4 +64,4 @@ class AdlaServiceSdkImpl:
 
         jobs = job_client.job.list(account, filter = filter, top = page_job_number, skip = skip)
 
-        return [AdlaJob(job.job_id, job.name, job.type.name, job.submitter, job.degree_of_parallelism, job.priority, job.submit_time, job.start_time, job.end_time, job.state.name, job.result.name) for job in jobs]
+        return [AdlaJob(job.job_id, job.name, job.type.name, job.submitter, job.degree_of_parallelism, job.priority, job.submit_time, job.start_time, job.end_time, job.state.name, job.result.name, account) for job in jobs]

@@ -10,4 +10,4 @@ class TextPresenter(PresenterBase):
     def present(self, obj):
         super(TextPresenter, self).present(obj)
 
-        stdout.write(text + linesep)
+        stdout.write(obj + linesep)

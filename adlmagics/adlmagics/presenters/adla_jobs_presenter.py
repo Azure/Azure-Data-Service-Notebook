@@ -1,4 +1,5 @@
 from IPython.core.display import display, HTML
+from os import linesep
 
 from adlmagics.presenters.presenter_base import PresenterBase
 from adlmagics.models.adla_job import AdlaJob
@@ -33,7 +34,7 @@ class AdlaJobsPresenter(PresenterBase):
             html += "            <td>%s</td>" % (job.submitter)
             html += "            <td>%s</td>" % (job.state)
             html += "            <td>%s</td>" % (job.result)
-            html += "            <td><a href='https://%s.azuredatalakeanalytics.net/jobs/%s' target='_blank'>View Job</a></td>" % (args.account, job.id)
+            html += "            <td><a href='https://%s.azuredatalakeanalytics.net/jobs/%s' target='_blank'>View Job</a></td>" % (job.account, job.id)
             html += "        </tr>"
         html += "    </tbody>"
         html += "</table>"

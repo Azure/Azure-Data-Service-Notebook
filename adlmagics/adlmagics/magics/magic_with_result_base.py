@@ -11,7 +11,7 @@ class MagicWithResultBase(MagicBase):
     def _convert_result(self, result):
         converted_result = self._result_converter.convert(result)
 
-        if converted_result is DataFrame:
+        if isinstance(converted_result, DataFrame):
             self._present("The result is pandas' DataFrame, you can call functions accordingly.")
         
         return converted_result

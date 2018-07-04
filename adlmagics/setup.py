@@ -1,4 +1,5 @@
 import setuptools
+import re
 
 name             = "adlmagics"
 description      = "Azure Data Lake management magics for Jupyter Notebook"
@@ -13,12 +14,13 @@ license          = "MIT"
 with open("../README.md", "r") as f:
     long_description = f.read()
 
-version_file = read("adlmagics/version.py")
-version_match = re.search(r"""^adlmagics_version = ['"]([^'"]*)['"]""", version_file)
-if version_match:
-    version = version_match.group(1)
-else:
-    raise RuntimeError("Unable to find version string.")
+with open("adlmagics/version.py") as f:
+    version_file = f.read()
+    version_match = re.search(r"""^adlmagics_version = ['"]([^'"]*)['"]""", version_file)
+    if version_match:
+        version = version_match.group(1)
+    else:
+        raise RuntimeError("Unable to find version string.")
 
 setuptools.setup(
   name = name,
