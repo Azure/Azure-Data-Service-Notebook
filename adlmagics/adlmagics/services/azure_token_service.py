@@ -11,7 +11,8 @@ class AzureTokenService:
 
     token_refresh_offset_in_seconds = -60
 
-    def __init__(self):
+    def __init__(self, presenter_factory):
+        self.__presenter_factory = presenter_factory
         self.__tenant = None
         self.__tenant_id = None
         self.__logged_in_user = None
@@ -22,7 +23,7 @@ class AzureTokenService:
     def login(self, tenant):
         auth_context = AuthenticationContext(AzureTokenService.authority_url_format.format(tenant))
         user_code = auth_context.acquire_user_code(AzureTokenService.resource_url, AzureTokenService.client_id)
-        self.__write_line(user_code['message'])
+        self.__presenter_factory.present(user_code['message'])
 
         self.__token = auth_context.acquire_token_with_device_code(AzureTokenService.resource_url, user_code, AzureTokenService.client_id)
 
@@ -34,6 +35,7 @@ class AzureTokenService:
         self.__update_refresh_token_timer()
 
     def logout(self):
+        self.__presenter_factory = None
         self.__tenant = None
         self.__tenant_id = None
         self.__logged_in_user = None
@@ -76,6 +78,3 @@ class AzureTokenService:
         refresh_token_timer_interval = self.__token["expiresIn"] + AzureTokenService.token_refresh_offset_in_seconds
         self.__refresh_token_timer = Timer(refresh_token_timer_interval, self.__do_refresh_token)
         self.__refresh_token_timer.start()
-    
-    def __write_line(self, text):
-        stdout.write(text + linesep)

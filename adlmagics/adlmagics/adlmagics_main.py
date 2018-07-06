@@ -57,7 +57,7 @@ class AdlMagics(Magics):
         self.__register_presenter(AdlsFilesPresenter)
         self.__register_presenter(AdlsFoldersPresenter)
 
-        self.__token_service = AzureTokenService()
+        self.__token_service = AzureTokenService(self.__presenter_factory)
         self.__adla_service = AdlaServiceSdkImpl(self.__token_service)
         self.__adls_service = AdlsServiceSdkImpl(self.__token_service)
         
