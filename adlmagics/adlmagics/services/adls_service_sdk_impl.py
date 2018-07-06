@@ -13,10 +13,10 @@ from adlmagics.models.adls_account import AdlsAccount
 from adlmagics.models.adls_folder import AdlsFolder
 from adlmagics.models.adls_file import AdlsFile
 
-CONST_WINDOW_STR = "windows"
-CONST_WINDOW_UTF_8_ENCODE = "utf-8-sig"
-
 class AdlsServiceSdkImpl:
+    __windows_platform = "windows"
+    __windows_utf_8_encoding = "utf-8-sig"
+
     def __init__(self, token_service):
         self.__token_service = token_service
 
@@ -62,8 +62,8 @@ class AdlsServiceSdkImpl:
         with adls_fs_client.open(file_path) as f:
             for read_line in f:
                 # if platform is `window` and `encoding` is `utf-8`, change it to `utf-8-sig` for avoiding werid `\ufeff` problems
-                if(CONST_WINDOW_STR in platform().lower() and encoding.lower().strip() == "utf-8"):
-                    encoding = CONST_WINDOW_UTF_8_ENCODE
+                if(AdlsServiceSdkImpl.__windows_platform in platform().lower() and encoding.lower().strip() == "utf-8"):
+                    encoding = AdlsServiceSdkImpl.__windows_utf_8_encoding
                 read_lines.append(read_line.decode(encoding).strip().split(column_sep))
                 read_line_count += 1
                 if (read_line_count >= to_be_read_line_count):
