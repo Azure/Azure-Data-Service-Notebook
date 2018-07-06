@@ -1,1 +1,1 @@
-adlmagics_version = "0.0.1a3"
+adlmagics_version = "0.0.1a4"
