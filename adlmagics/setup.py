@@ -51,6 +51,6 @@ setuptools.setup(
     "numpy",
     "adal",
     "azure-mgmt-resource",
-    "azure-mgmt-datalake-analytics>=0.4.0", # for fix bug that 'DataLakeAnalyticsAccountManagementClient' object has no attribute 'account'
+    "azure-mgmt-datalake-analytics>=0.4.0,<=0.5.0",
     "azure-mgmt-datalake-store",
     "azure-datalake-store"])
