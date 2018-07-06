@@ -48,9 +48,11 @@ setuptools.setup(
     "notebook>=5.0.0",
     "ipykernel>=4.6.1",
     "pandas>=0.20.1",
-    "numpy",
-    "adal",
-    "azure-mgmt-resource",
+    "numpy>=1.12.1",
+    "adal>=1.0.1",
+	"msrest>=0.5.1",
+    "msrestazure>=0.4.32",
+    "azure-mgmt-resource>=1.2.2",
     "azure-mgmt-datalake-analytics>=0.4.0,<=0.5.0",
-    "azure-mgmt-datalake-store",
-    "azure-datalake-store"])
+    "azure-mgmt-datalake-store>=0.5.0",
+    "azure-datalake-store>=0.0.22"])
