@@ -16,7 +16,7 @@ class MagicBase:
         if (not getattr(args, arg_name)):
             sessioned_value = self._session_service.get_session_item(session_item_name)
             if (session_null_value == sessioned_value):
-                raise MagicArgumentError("Please specify argument '%s' or use setsession magic to set a value for session item '%s'" % (arg_name, session_item_name))
+                raise MagicArgumentError("Please specify argument '%s' or use setsessionitem magic to set a value for session item '%s'" % (arg_name, session_item_name))
             else:
                 setattr(args, arg_name, sessioned_value)
 
